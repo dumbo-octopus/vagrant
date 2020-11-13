@@ -1,5 +1,9 @@
-Vagrant.configure("2") do |config|
+$keyscript = <<-SCRIPT
+cat /vagrant/keys/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+SCRIPT
 
+Vagrant.configure("2") do |config|
+      
   (1..ENV['nameNodeCount'].to_i).each do |i|
     config.vm.define "nameNode-#{i}" do |node|
       node.vm.box = ENV['vmOS']
@@ -8,6 +12,7 @@ Vagrant.configure("2") do |config|
         v.cpus=ENV['cpuCount']
         v.memory=ENV['ram']
       end
+      node.vm.provision "shell", inline: $keyscript
     end
   end
 
@@ -19,6 +24,7 @@ Vagrant.configure("2") do |config|
         v.cpus=ENV['cpuCount']
         v.memory=ENV['ram']
       end
+      node.vm.provision "shell", inline: $keyscript
     end
   end
 
