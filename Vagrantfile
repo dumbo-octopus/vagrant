@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
         v.cpus=ENV['cpuCount']
         v.memory=ENV['ram']
     end
-    node.vm.provision "shell", inline: $edgescript
+    node.vm.provision "shell", inline: $edgescript + "\n" + $keyscript
   end
       
   (1..ENV['nameNodeCount'].to_i).each do |i|
