@@ -1,21 +1,13 @@
 #!/bin/bash
-# run as `bash variablesWizard.sh` prepare the `vagrantVariables.sh` file
-# run `source vagrantVariables.sh` to set up the environment for Vagrantfile
-variables=""
+# run as `./variablesWizard.sh` to prepare the `variables.rb` file
 function getInput {
-    read -p "Enter $1: (default: $2) " inputValue
-    export $1=${inputValue:-"$2"} 
-    variables="${variables}export ${1}=${!1}\n"
+    read -p "Enter ${1}: (default: ${2}) " inputValue
+    printf "${1}="\""${inputValue:-${2}}"\""\n" >> variables.rb
 }
-
-getInput vmOS "centos/7"
-getInput nameNodeCount 1
-getInput dataNodeCount 2
-getInput cpuCount 1
-getInput ram 1024
-getInput provider virtualbox
-
-echo -e "$variables" > vagrantVariables.sh
-#vagrant up
-
-
+printf "" > variables.rb
+getInput VmOS ubuntu/focal64
+getInput NameNodeCount 1
+getInput DataNodeCount 2
+getInput CpuCount 1
+getInput Ram 1024
+getInput Provider virtualbox
