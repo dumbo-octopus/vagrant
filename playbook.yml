@@ -1,5 +1,10 @@
-- hosts: localhost
-  connection: local
+---
+- name: No-op
+  hosts: all
+  # connection: local
   gather_facts: no
+
   tasks:
     - debug: msg="edgeNode up"
+
+    
