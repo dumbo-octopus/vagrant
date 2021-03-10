@@ -1,6 +1,0 @@
-VmOS="ubuntu/focal64"
-NameNodeCount="1"
-DataNodeCount="0"
-CpuCount="1"
-Ram="512"
-Provider="virtualbox"
