@@ -10,9 +10,10 @@ inventory_common = %{[all:children]
   ansible_ssh_private_key_file=/vagrant/keys/id_rsa
 }
 
-File.open("ansible/inventory", 'w') { |file| file.truncate(0)
+File.open("ansible/inventory", 'w') do |file|
+  file.truncate(0)
   file.write(inventory_common)
-}
+end
 
 Vagrant.configure("2") do |config|
   config.vm.box = VmOS
