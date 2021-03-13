@@ -1,12 +1,26 @@
 require_relative "variables.rb"
 
+inventory_common = %{[all:children]
+  edgeNode
+  nameNode
+  dataNode
+
+[all:vars]
+  ansible_ssh_user=vagrant
+  ansible_ssh_private_key_file=/vagrant/keys/id_rsa
+}
+
+File.open("ansible/inventory", 'w') { |file| file.truncate(0)
+  file.write(inventory_common)
+}
+
 Vagrant.configure("2") do |config|
   config.vm.box = VmOS
   config.vm.provider Provider do |v|
     v.cpus = CpuCount
     v.memory = Ram
   end
-  config.vm.synced_folder ".", "/vagrant", disabled: false
+  #config.vm.synced_folder ".", "/vagrant", disabled: false
   config.vm.provision "shell", inline: "cat /vagrant/keys/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys && chmod 600 /home/vagrant/.ssh/authorized_keys"
 
 
@@ -17,7 +31,7 @@ Vagrant.configure("2") do |config|
     # prototype dynamic inventory
     node.vm.provision "shell", inline: "echo '[edgeNode]\n192.168.60.9' >> /vagrant/ansible/inventory"
     node.vm.provision "ansible_local" do |ansible|
-      ansible.playbook = "/vagrant/playbook.yml"
+      ansible.playbook = "/vagrant/ansible/playbook.yml"
     end
   end
       
