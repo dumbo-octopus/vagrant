@@ -1,3 +1,4 @@
 .vagrant/
+vagrantVariables.sh
 variables.rb
-
+ansible/inventory
