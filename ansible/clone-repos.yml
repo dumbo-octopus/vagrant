@@ -1,0 +1,18 @@
+---
+- name: Playbook for cloning the dumbo-octopus/flow and /ansible repos
+  hosts: edgeNode
+
+  tasks:
+    - name: Clone ansible repo
+      become: yes
+      git:
+        repo: https://github.com/dumbo-octopus/ansible
+        dest: /dumbo-octopus/ansible
+        clone: true
+    
+    - name: Clone flow repo
+      become: yes
+      git:
+        repo: https://github.com/dumbo-octopus/flow
+        dest: /dumbo-octopus/flow
+        clone: true

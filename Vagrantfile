@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     # prototype dynamic inventory
     node.vm.provision "shell", inline: "echo '[edgeNode]\n192.168.60.9' >> /vagrant/ansible/inventory"
     node.vm.provision "ansible_local" do |ansible|
-      ansible.playbook = "/vagrant/ansible/playbook.yml"
+      ansible.playbook = "/vagrant/ansible/clone-repos.yml"
     end
   end
       
