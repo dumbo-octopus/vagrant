@@ -2,3 +2,4 @@
 vagrantVariables.sh
 variables.rb
 ansible/inventory
+/ansible/test.yml
